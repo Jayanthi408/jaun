@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday✨ Tharun🥰</title> 
+
+<title>Happy Birthday Tharun</title>
+
 <style>
 
 *{
@@ -15,46 +17,115 @@
 body{
     overflow:hidden;
     height:100vh;
-    background:black;
+    background:linear-gradient(to bottom,#000000,#020024,#090979);
     display:flex;
     justify-content:center;
     align-items:center;
     font-family:Arial, sans-serif;
 }
 
-/* Birthday Text */
-h1{
+/* Center Content */
+
+.container{
     position:absolute;
-    color:white;
-    font-size:60px;
     text-align:center;
     z-index:10;
+    padding:20px;
+}
+
+/* Main Birthday Text */
+
+h1{
+    color:white;
+    font-size:65px;
 
     text-shadow:
     0 0 10px #fff,
     0 0 20px #ff00ff,
-    0 0 40px #00ffff;
+    0 0 40px #00ffff,
+    0 0 80px #ff00ff;
 
-    animation: zoom 2s infinite alternate;
+    animation:zoom 2s infinite alternate;
 }
 
+/* Wish Text */
+
+.wish{
+    display:block;
+    margin-top:25px;
+    font-size:28px;
+    color:white;
+
+    text-shadow:
+    0 0 10px #00ffff,
+    0 0 20px #ff00ff;
+
+    animation:blinkText 2s infinite alternate;
+}
+
+/* Text Animation */
+
 @keyframes zoom{
+
     from{
         transform:scale(1);
     }
+
     to{
         transform:scale(1.08);
     }
 }
 
-/* Firework Particle */
+@keyframes blinkText{
+
+    from{
+        opacity:0.5;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+/* Stars */
+
+.star{
+    position:absolute;
+    background:white;
+    border-radius:50%;
+    animation:blink 2s infinite;
+}
+
+/* Star Blink */
+
+@keyframes blink{
+
+    0%,100%{
+        opacity:0.2;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(2);
+        box-shadow:
+        0 0 10px white,
+        0 0 20px cyan,
+        0 0 30px magenta;
+    }
+}
+
+/* Fireworks */
+
 .firework{
     position:absolute;
     width:6px;
     height:6px;
     border-radius:50%;
-    animation: explode 1.5s linear forwards;
+    animation:explode 1.5s linear forwards;
 }
+
+/* Explosion Animation */
 
 @keyframes explode{
 
@@ -64,6 +135,7 @@ h1{
     }
 
     100%{
+
         transform:
         translate(var(--x),var(--y))
         scale(0);
@@ -77,10 +149,51 @@ h1{
 
 <body>
 
-<h1>Happy Birthday ✨ Tharun</h1>
-<h2> May this year all your dreams comes true and fullfillness 🥳</h2>
+<!-- Birthday Content -->
+
+<div class="container">
+
+    <h1>
+        Happy Birthday ✨ Tharun
+    </h1>
+
+    <span class="wish">
+        May this year all your dreams comes true and fullfillness 🥳
+    </span>
+
+</div>
+
+<!-- Firecracker Sound -->
+
+<audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8e1f9b7.mp3?filename=fireworks-29629.mp3" type="audio/mpeg">
+</audio>
 
 <script>
+
+/* Create Stars */
+
+for(let i=0;i<250;i++){
+
+    let star=document.createElement("div");
+
+    star.classList.add("star");
+
+    star.style.top=Math.random()*100+"vh";
+    star.style.left=Math.random()*100+"vw";
+
+    let size=Math.random()*4+1;
+
+    star.style.width=size+"px";
+    star.style.height=size+"px";
+
+    star.style.animationDuration=
+    (Math.random()*3+1)+"s";
+
+    document.body.appendChild(star);
+}
+
+/* Fireworks Function */
 
 function createFirework(){
 
@@ -91,21 +204,24 @@ function createFirework(){
         "#ff00ff",
         "#ffff00",
         "#ff8800",
-        "#ffffff"
+        "#ffffff",
+        "#00bfff"
     ];
 
     let x=Math.random()*window.innerWidth;
     let y=Math.random()*window.innerHeight;
 
-    for(let i=0;i<80;i++){
+    for(let i=0;i<100;i++){
 
         let particle=document.createElement("div");
+
         particle.classList.add("firework");
 
         document.body.appendChild(particle);
 
         let angle=Math.random()*360;
-        let distance=Math.random()*250;
+
+        let distance=Math.random()*300;
 
         let moveX=Math.cos(angle)*distance+"px";
         let moveY=Math.sin(angle)*distance+"px";
@@ -129,6 +245,7 @@ function createFirework(){
 }
 
 /* Repeat Fireworks */
+
 setInterval(createFirework,700);
 
 </script>
