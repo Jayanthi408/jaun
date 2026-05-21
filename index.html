@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Tharun</title>
-
+<title>Happy Birthday✨ Tharun🥰</title> 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -13,81 +13,124 @@
 }
 
 body{
-    height:100vh;
     overflow:hidden;
+    height:100vh;
+    background:black;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:linear-gradient(to bottom,#000428,#004e92);
     font-family:Arial, sans-serif;
 }
 
 /* Birthday Text */
 h1{
+    position:absolute;
     color:white;
     font-size:60px;
     text-align:center;
-    text-shadow:0 0 10px #fff,
-                0 0 20px #ff00ff,
-                0 0 40px #00ffff;
-    z-index:2;
-    animation: glow 2s infinite alternate;
+    z-index:10;
+
+    text-shadow:
+    0 0 10px #fff,
+    0 0 20px #ff00ff,
+    0 0 40px #00ffff;
+
+    animation: zoom 2s infinite alternate;
 }
 
-@keyframes glow{
+@keyframes zoom{
     from{
         transform:scale(1);
     }
     to{
-        transform:scale(1.05);
+        transform:scale(1.08);
     }
 }
 
-/* Stars */
-.star{
+/* Firework Particle */
+.firework{
     position:absolute;
-    width:4px;
-    height:4px;
-    background:white;
+    width:6px;
+    height:6px;
     border-radius:50%;
-    animation: blink 1.5s infinite;
+    animation: explode 1.5s linear forwards;
 }
 
-@keyframes blink{
-    0%,100%{
-        opacity:0.2;
-        transform:scale(1);
-    }
-    50%{
+@keyframes explode{
+
+    0%{
+        transform:translate(0,0) scale(1);
         opacity:1;
-        transform:scale(2);
+    }
+
+    100%{
+        transform:
+        translate(var(--x),var(--y))
+        scale(0);
+
+        opacity:0;
     }
 }
+
 </style>
 </head>
 
 <body>
 
 <h1>Happy Birthday ✨ Tharun</h1>
+<h2> May this year all your dreams comes true and fullfillness 🥳</h2>
 
 <script>
-for(let i=0;i<150;i++){
 
-    let star=document.createElement("div");
-    star.classList.add("star");
+function createFirework(){
 
-    star.style.top=Math.random()*100+"vh";
-    star.style.left=Math.random()*100+"vw";
+    let colors=[
+        "#ff0000",
+        "#00ff00",
+        "#00ffff",
+        "#ff00ff",
+        "#ffff00",
+        "#ff8800",
+        "#ffffff"
+    ];
 
-    star.style.animationDuration=
-    (Math.random()*2+1)+"s";
+    let x=Math.random()*window.innerWidth;
+    let y=Math.random()*window.innerHeight;
 
-    star.style.width=
-    star.style.height=
-    Math.random()*5+2+"px";
+    for(let i=0;i<80;i++){
 
-    document.body.appendChild(star);
+        let particle=document.createElement("div");
+        particle.classList.add("firework");
+
+        document.body.appendChild(particle);
+
+        let angle=Math.random()*360;
+        let distance=Math.random()*250;
+
+        let moveX=Math.cos(angle)*distance+"px";
+        let moveY=Math.sin(angle)*distance+"px";
+
+        particle.style.left=x+"px";
+        particle.style.top=y+"px";
+
+        particle.style.background=
+        colors[Math.floor(Math.random()*colors.length)];
+
+        particle.style.setProperty("--x",moveX);
+        particle.style.setProperty("--y",moveY);
+
+        particle.style.boxShadow=
+        "0 0 20px " + particle.style.background;
+
+        setTimeout(()=>{
+            particle.remove();
+        },1500);
+    }
 }
+
+/* Repeat Fireworks */
+setInterval(createFirework,700);
+
 </script>
 
 </body>
