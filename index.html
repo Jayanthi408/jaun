@@ -24,16 +24,15 @@ body{
     font-family:Arial, sans-serif;
 }
 
-/* Center Content */
+/* Content */
 
 .container{
     position:absolute;
     text-align:center;
     z-index:10;
-    padding:20px;
 }
 
-/* Main Birthday Text */
+/* Main Text */
 
 h1{
     color:white;
@@ -42,13 +41,10 @@ h1{
     text-shadow:
     0 0 10px #fff,
     0 0 20px #ff00ff,
-    0 0 40px #00ffff,
-    0 0 80px #ff00ff;
+    0 0 40px #00ffff;
 
     animation:zoom 2s infinite alternate;
 }
-
-/* Wish Text */
 
 .wish{
     display:block;
@@ -63,7 +59,7 @@ h1{
     animation:blinkText 2s infinite alternate;
 }
 
-/* Text Animation */
+/* Animations */
 
 @keyframes zoom{
 
@@ -96,8 +92,6 @@ h1{
     animation:blink 2s infinite;
 }
 
-/* Star Blink */
-
 @keyframes blink{
 
     0%,100%{
@@ -126,8 +120,6 @@ h1{
     animation:explode 1.5s linear forwards;
 }
 
-/* Explosion Animation */
-
 @keyframes explode{
 
     0%{
@@ -136,7 +128,6 @@ h1{
     }
 
     100%{
-
         transform:
         translate(var(--x),var(--y))
         scale(0);
@@ -149,8 +140,6 @@ h1{
 </head>
 
 <body>
-
-<!-- Birthday Content -->
 
 <div class="container">
 
@@ -166,23 +155,21 @@ h1{
 
 <!-- Crackers Sound -->
 
-<audio id="crackerSound" loop autoplay>
-    <source src="https://assets.mixkit.co/active_storage/sfx/212/212-preview.mp3" type="audio/mpeg">
+<audio id="crackerSound" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8e1f9b7.mp3?filename=fireworks-29629.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-/* Auto Play Sound */
+/* Start Sound On Click */
 
-window.addEventListener("click", () => {
+document.body.addEventListener("click", function(){
 
-    let sound=document.getElementById("crackerSound");
+    document.getElementById("crackerSound").play();
 
-    sound.play();
+}, { once:true });
 
-});
-
-/* Create Stars */
+/* Stars */
 
 for(let i=0;i<250;i++){
 
@@ -204,7 +191,7 @@ for(let i=0;i<250;i++){
     document.body.appendChild(star);
 }
 
-/* Fireworks Function */
+/* Fireworks */
 
 function createFirework(){
 
@@ -215,8 +202,7 @@ function createFirework(){
         "#ff00ff",
         "#ffff00",
         "#ff8800",
-        "#ffffff",
-        "#00bfff"
+        "#ffffff"
     ];
 
     let x=Math.random()*window.innerWidth;
@@ -254,8 +240,6 @@ function createFirework(){
         },1500);
     }
 }
-
-/* Repeat Fireworks */
 
 setInterval(createFirework,700);
 
