@@ -121,24 +121,24 @@ h1{
 <span class="wish">May this year all your dreams come true 🥳</span>
 </div>
 
-<!-- AUDIO (FIXED) -->
-<audio id="sound" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8e1f9b7.mp3?filename=fireworks-29629.mp3" type="audio/mpeg">
+<!-- 🎵 BACKGROUND MUSIC -->
+<audio id="bgMusic" loop preload="auto">
+    <source src="https://assets.mixkit.co/active_storage/sfx/212/212-preview.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
 const btn = document.getElementById("startBtn");
-const sound = document.getElementById("sound");
+const music = document.getElementById("bgMusic");
 
-/* CLICK TO START SOUND (FIXED SAFE PLAY) */
+/* CLICK TO START MUSIC */
 btn.addEventListener("click", async () => {
     try {
-        await sound.play();
+        music.volume = 0.5;   // volume control
+        await music.play();
         btn.style.display = "none";
-    } catch (err) {
-        console.log("Sound blocked:", err);
-        alert("Tap again to enable sound 🔊");
+    } catch (e) {
+        alert("Tap again to start music 🔊");
     }
 });
 
