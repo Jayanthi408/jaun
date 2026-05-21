@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Happy Birthday Tharun</title>
 
 <style>
@@ -21,93 +20,73 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family:Arial, sans-serif;
+    font-family:Arial;
 }
 
-/* Content */
+/* Button */
+
+#startBtn{
+    position:absolute;
+    z-index:20;
+    padding:15px 30px;
+    font-size:22px;
+    border:none;
+    border-radius:10px;
+    background:#ff00ff;
+    color:white;
+    cursor:pointer;
+    box-shadow:0 0 20px #ff00ff;
+}
+
+/* Text */
 
 .container{
-    position:absolute;
     text-align:center;
     z-index:10;
 }
 
-/* Main Text */
-
 h1{
     color:white;
-    font-size:65px;
-
-    text-shadow:
-    0 0 10px #fff,
-    0 0 20px #ff00ff,
-    0 0 40px #00ffff;
-
+    font-size:60px;
+    text-shadow:0 0 10px #fff,0 0 20px #ff00ff,0 0 40px #00ffff;
     animation:zoom 2s infinite alternate;
 }
 
 .wish{
     display:block;
-    margin-top:25px;
-    font-size:28px;
+    margin-top:20px;
+    font-size:25px;
     color:white;
-
-    text-shadow:
-    0 0 10px #00ffff,
-    0 0 20px #ff00ff;
-
+    text-shadow:0 0 10px #00ffff;
     animation:blinkText 2s infinite alternate;
 }
 
 /* Animations */
 
 @keyframes zoom{
-
-    from{
-        transform:scale(1);
-    }
-
-    to{
-        transform:scale(1.08);
-    }
+    from{transform:scale(1);}
+    to{transform:scale(1.08);}
 }
 
 @keyframes blinkText{
-
-    from{
-        opacity:0.5;
-    }
-
-    to{
-        opacity:1;
-    }
+    from{opacity:0.5;}
+    to{opacity:1;}
 }
 
 /* Stars */
 
 .star{
     position:absolute;
+    width:4px;
+    height:4px;
     background:white;
     border-radius:50%;
     animation:blink 2s infinite;
 }
 
 @keyframes blink{
-
-    0%,100%{
-        opacity:0.2;
-        transform:scale(1);
-    }
-
-    50%{
-        opacity:1;
-        transform:scale(2);
-
-        box-shadow:
-        0 0 10px white,
-        0 0 20px cyan,
-        0 0 30px magenta;
-    }
+    0%,100%{opacity:0.2;transform:scale(1);}
+    50%{opacity:1;transform:scale(2);box-shadow:0 0 10px white,0 0 20px cyan;}
 }
 
 /* Fireworks */
@@ -121,17 +100,9 @@ h1{
 }
 
 @keyframes explode{
-
-    0%{
-        transform:translate(0,0) scale(1);
-        opacity:1;
-    }
-
+    0%{transform:translate(0,0) scale(1);opacity:1;}
     100%{
-        transform:
-        translate(var(--x),var(--y))
-        scale(0);
-
+        transform:translate(var(--x),var(--y)) scale(0);
         opacity:0;
     }
 }
@@ -141,107 +112,71 @@ h1{
 
 <body>
 
+<!-- Button -->
+<button id="startBtn">Click Me 🎉</button>
+
+<!-- Content -->
 <div class="container">
-
-    <h1>
-        Happy Birthday ✨ Tharun
-    </h1>
-
-    <span class="wish">
-        May this year all your dreams comes true and fullfillness 🥳
-    </span>
-
+<h1>Happy Birthday ✨ Tharun🥰</h1>
+<span class="wish">May all your dreams come true 🥳</span>
 </div>
 
-<!-- Crackers Sound -->
-
-<audio id="crackerSound" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8e1f9b7.mp3?filename=fireworks-29629.mp3" type="audio/mpeg">
+<!-- Sound -->
+<audio id="sound" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8e1f9b7.mp3?filename=fireworks-29629.mp3">
 </audio>
 
 <script>
 
-/* Start Sound On Click */
+/* CLICK TO START SOUND */
+const btn = document.getElementById("startBtn");
+const sound = document.getElementById("sound");
 
-document.body.addEventListener("click", function(){
+btn.addEventListener("click", () => {
+    sound.play();
+    btn.style.display = "none";
+});
 
-    document.getElementById("crackerSound").play();
-
-}, { once:true });
-
-/* Stars */
-
-for(let i=0;i<250;i++){
-
+/* STARS */
+for(let i=0;i<200;i++){
     let star=document.createElement("div");
-
     star.classList.add("star");
-
     star.style.top=Math.random()*100+"vh";
     star.style.left=Math.random()*100+"vw";
-
     let size=Math.random()*4+1;
-
     star.style.width=size+"px";
     star.style.height=size+"px";
-
-    star.style.animationDuration=
-    (Math.random()*3+1)+"s";
-
+    star.style.animationDuration=(Math.random()*3+1)+"s";
     document.body.appendChild(star);
 }
 
-/* Fireworks */
-
-function createFirework(){
-
-    let colors=[
-        "#ff0000",
-        "#00ff00",
-        "#00ffff",
-        "#ff00ff",
-        "#ffff00",
-        "#ff8800",
-        "#ffffff"
-    ];
+/* FIREWORKS */
+function firework(){
+    let colors=["#ff0000","#00ff00","#00ffff","#ff00ff","#ffff00","#ff8800","#ffffff"];
 
     let x=Math.random()*window.innerWidth;
     let y=Math.random()*window.innerHeight;
 
-    for(let i=0;i<100;i++){
-
-        let particle=document.createElement("div");
-
-        particle.classList.add("firework");
-
-        document.body.appendChild(particle);
+    for(let i=0;i<80;i++){
+        let p=document.createElement("div");
+        p.classList.add("firework");
+        document.body.appendChild(p);
 
         let angle=Math.random()*360;
+        let dist=Math.random()*250;
 
-        let distance=Math.random()*300;
+        p.style.left=x+"px";
+        p.style.top=y+"px";
+        p.style.background=colors[Math.floor(Math.random()*colors.length)];
 
-        let moveX=Math.cos(angle)*distance+"px";
-        let moveY=Math.sin(angle)*distance+"px";
+        p.style.setProperty("--x",Math.cos(angle)*dist+"px");
+        p.style.setProperty("--y",Math.sin(angle)*dist+"px");
 
-        particle.style.left=x+"px";
-        particle.style.top=y+"px";
-
-        particle.style.background=
-        colors[Math.floor(Math.random()*colors.length)];
-
-        particle.style.setProperty("--x",moveX);
-        particle.style.setProperty("--y",moveY);
-
-        particle.style.boxShadow=
-        "0 0 20px " + particle.style.background;
-
-        setTimeout(()=>{
-            particle.remove();
-        },1500);
+        setTimeout(()=>p.remove(),1500);
     }
 }
 
-setInterval(createFirework,700);
+setInterval(firework,700);
 
 </script>
 
