@@ -1,20 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Happy Birthday</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Tharun</title>
+
 <style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 body{
-background:black;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-font-size:40px;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(to bottom,#000428,#004e92);
+    font-family:Arial, sans-serif;
+}
+
+/* Birthday Text */
+h1{
+    color:white;
+    font-size:60px;
+    text-align:center;
+    text-shadow:0 0 10px #fff,
+                0 0 20px #ff00ff,
+                0 0 40px #00ffff;
+    z-index:2;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{
+        transform:scale(1);
+    }
+    to{
+        transform:scale(1.05);
+    }
+}
+
+/* Stars */
+.star{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:white;
+    border-radius:50%;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink{
+    0%,100%{
+        opacity:0.2;
+        transform:scale(1);
+    }
+    50%{
+        opacity:1;
+        transform:scale(2);
+    }
 }
 </style>
 </head>
+
 <body>
-Happy Birthday ✨ Tharun
+
+<h1>Happy Birthday ✨ Tharun</h1>
+
+<script>
+for(let i=0;i<150;i++){
+
+    let star=document.createElement("div");
+    star.classList.add("star");
+
+    star.style.top=Math.random()*100+"vh";
+    star.style.left=Math.random()*100+"vw";
+
+    star.style.animationDuration=
+    (Math.random()*2+1)+"s";
+
+    star.style.width=
+    star.style.height=
+    Math.random()*5+2+"px";
+
+    document.body.appendChild(star);
+}
+</script>
+
 </body>
 </html>
