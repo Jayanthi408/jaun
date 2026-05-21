@@ -118,23 +118,28 @@ h1{
 <!-- Content -->
 <div class="container">
 <h1>Happy Birthday ✨ Tharun🥰</h1>
-<span class="wish">May all your dreams come true 🥳</span>
+<span class="wish">May this year all your dreams come true 🥳</span>
 </div>
 
-<!-- Sound -->
+<!-- AUDIO (FIXED) -->
 <audio id="sound" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8e1f9b7.mp3?filename=fireworks-29629.mp3">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8e1f9b7.mp3?filename=fireworks-29629.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-/* CLICK TO START SOUND */
 const btn = document.getElementById("startBtn");
 const sound = document.getElementById("sound");
 
-btn.addEventListener("click", () => {
-    sound.play();
-    btn.style.display = "none";
+/* CLICK TO START SOUND (FIXED SAFE PLAY) */
+btn.addEventListener("click", async () => {
+    try {
+        await sound.play();
+        btn.style.display = "none";
+    } catch (err) {
+        console.log("Sound blocked:", err);
+        alert("Tap again to enable sound 🔊");
+    }
 });
 
 /* STARS */
